@@ -58,3 +58,15 @@ pub enum Command {
         show_urgent: bool,
     },
 }
+
+impl ToString for Command {
+    fn to_string(&self) -> String {
+        match self {
+            Command::New { .. } => String::from("New"),
+            Command::Delete { .. } => String::from("Delete"),
+            Command::Update { .. } => String::from("Update"),
+            Command::Show { .. } => String::from("Show"),
+            Command::List { .. } => String::from("List"),
+        }
+    }
+}

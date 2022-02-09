@@ -43,7 +43,7 @@ impl Todo {
 
 #[derive(Serialize, Deserialize)]
 pub struct TodoList {
-    list: Vec<Todo>,
+    pub list: Vec<Todo>,
 }
 
 impl TodoList {

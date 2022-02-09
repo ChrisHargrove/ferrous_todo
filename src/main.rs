@@ -4,29 +4,15 @@ mod io;
 mod commands;
 mod models;
 
-use cli::{Args, Command, Parser};
+use cli::{Args, Parser};
 
 fn main() {
     let args = Args::parse();
 
-    let todo_list = io::deserialize_todo_list();
+    let mut todo_list = io::deserialize_todo_list();
+    let commander = commands::Commander::new();
 
-    let _ = match args.command {
-        Command::New {
-            title,
-            message,
-            mark_urgent,
-        } => 1,
-        Command::Delete { id, all, urgent } => 2,
-        Command::Update {
-            id,
-            title,
-            message,
-            mark_urgent,
-        } => 3,
-        Command::Show { id } => 4,
-        Command::List { count, show_urgent } => 5,
-    };
+    commander.command(args.command, &mut todo_list);
 
     io::serialize_todo_list(todo_list);
 }
